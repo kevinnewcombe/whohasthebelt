@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Who has the Championship Belt?</title>
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  
+  {% capture css %}{% include 'style.css' %}{% endcapture %}
+  <style>{{ css | cssmin }}</style>
+
+  <meta name="description" content="Last year's NBA champs start this year with a belt that passes to whoever beats them, and so on. Who has it right now??">
+  <meta name="robots" content="index, follow, nocache">
+  <meta property="og:title" content="Who has the championship belt?">
+  <meta property="og:description" content="Last year's NBA champs start this year with a belt that passes to whoever beats them, and so on. Who has it right now?">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://whohasthebelt.vercel.app/" />
+  <meta property="og:image" content="https://whohasthebelt.vercel.app/opengraph.jpg?v=2" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="article:published_time" content="{{ "now" | date: "%Y-%m-%dT%H:%M:%S+00:00" }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <article>
+    <header id="hero">
+      <span class="hero__eyebrow">The NBA <strong>Championship belt</strong> is held by the</span>
+      {%- if data.streaks.last.full_name == 'Orlando Magic' -%}
+        <h1><a href="https://www.youtube.com/watch?v=8Vqd-sVisr4" target="_blank">{{ data.streaks.last.full_name }}</a></h1>
+      {%- else -%}
+        <h1>{{ data.streaks.last.full_name }}</h1>
+      {%- endif -%} 
+        <span class="hero__sub">as of {{ data.lastRun }}</span>
+      </header>
+      <main>
+      <section>
+        <h2>About the belt.</h2>
+        <p class="large">The <a href="https://www.reddit.com/r/nba/comments/4aq6zk/current_nba_championship_belt/">championship belt</a> (not an actual thing) is based around the idea of the winners of last season's NBA finals starting the current season with a championship belt. They have it until they lose a game, at which point it goes to the team that beat them and so on.</p>
+      </section>
+
+      <section>
+        <h2>How we got here.</h2>
+        <ul>
+          {% for streak in data.streaks %}
+            <li>
+              {%- if streak.length == 1 -%}
+                {% assign length = '(' | append: streak.length | append: ' game)' %}
+              {%- else -%}
+                {% assign length = '(' | append: streak.length | append: ' games)' %}
+              {%- endif -%}         
+    
+              {%- if forloop.first -%}
+                The <strong>{{ streak.full_name }}</strong> started the season with the belt and had it until {{ streak.endDate }} {{length}}.
+              {%- elsif forloop.last == false -%}
+                The <strong>{{ streak.full_name }}</strong> beat the <strong>{{streak.prev_holder }}</strong> on {{ streak.startDate }} and held the belt until {{ streak.endDate }} {{length}}.
+              {%- else -%}
+                The <strong>{{ streak.full_name }}</strong> have had the belt since beating the <strong>{{streak.prev_holder }}</strong> on {{ streak.startDate }} {{ length }}.
+              {%- endif -%}
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section>
+        <h2>{{ data.streaks.last.full_name }} upcoming games.</h2>
+        <ul>
+          {% for game in data.upcomingGames %}
+            <li>{{ game.visitor_team.full_name}} at {{ game.home_team.full_name}} on {{ game.human_date }}.</li>
+          {% endfor %}
+        </ul>
+      </section>
+    </main>
+    <footer>
+      <p>
+        This website is not affiliated with, endorsed, or sponsored by the National Basketball Association or any of its teams.<br />
+        Built by <a href="https://www.kevin-newcombe.com">Kevin Newcombe</a>.
+      </p>
+    </footer>
+  </article>
+</body>
+</html>

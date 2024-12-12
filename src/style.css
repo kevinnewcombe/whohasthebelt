@@ -1,0 +1,115 @@
+:root{
+  color-scheme: light dark;
+  --section-gap: 100px;
+}
+
+body{
+  padding: 0 20px;
+  margin:0;
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  line-height: 1.5;
+  font-size: 16px;
+  
+  color: light-dark(#162132, #eee);
+  background: light-dark(#eee, #162132);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+h1{
+  font-size: 3.5rem;
+  padding:0;
+  margin:0;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+h2{
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+p{
+  font-size: 1rem;
+}
+a{
+  color: light-dark(#004ed3, #67d9ff);
+  &:hover{
+    color: light-dark(#162132, #eee);
+  }
+}
+article{
+  width: min(100%, 1000px);
+  margin: 0 auto;
+}
+
+section{
+  margin-bottom: var(--section-gap);
+}
+
+ul{
+  list-style-type: none;
+  padding:0;
+}
+
+li{
+  font-size: 1rem;
+  padding:0.5rem 0;
+}
+
+.hero__eyebrow{
+  display:inline-block;
+  opacity: 0.8;
+  font-size: 1.25em;
+  font-weight: 300;
+  padding:0;
+  margin:0;
+  text-wrap: balance;
+}
+
+.hero__sub{
+  opacity: 0.8;
+}
+
+
+#hero{
+  min-height: 66.7vh;
+  padding: var(--section-gap) 0;
+  align-content: center;
+  text-align: center;
+}
+footer{
+  padding: 25px 0;
+}
+footer p{
+  font-size: 1.125rem;
+}
+@media(min-width: 640px){
+  :root{
+    --section-gap: 150px;
+  }
+  h1{
+    font-size: 7rem;
+  }
+  h2{
+    font-size: 2rem;
+  }
+  p{
+    font-size: 1.25rem;
+  }
+
+  li{
+    font-size: 1.25rem;
+    padding:0.75rem 0;
+  }
+  .hero__eyebrow{
+    font-size: 1.5rem;
+  }
+  
+}
