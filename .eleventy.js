@@ -2,7 +2,7 @@ const htmlmin = require("html-minifier-terser");
 const CleanCSS = require("clean-css");
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/favicon": "/" });
-  // eleventyConfig.addPassthroughCopy({ "src/style.css": "/" });
+  eleventyConfig.addPassthroughCopy({ "src/*.css": "/" });
   eleventyConfig.addFilter("cssmin", function (code) {
 		return new CleanCSS({}).minify(code).styles;
 	});
