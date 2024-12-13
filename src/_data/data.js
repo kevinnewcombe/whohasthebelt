@@ -79,7 +79,7 @@ module.exports = async function () {
     {
       full_name: 'Boston Celtics',
       id: 2,
-      length: 1,
+      length: 0,
       startDate: formatStreakDate('2024-10-22')
     }
   ];
@@ -100,9 +100,9 @@ module.exports = async function () {
       def = {...game.visitor_team, score: game.visitor_team_score };
     }
     if(def){
+      currentStreak.length++; // Increase the value for 'games played with the belt'
       if(def.score > opp.score){
-        // Current streak keeps going
-        currentStreak.length++;
+
       }else{
         // start a new steak
         currentStreak.endDate = formatStreakDate(game.date);
@@ -110,7 +110,7 @@ module.exports = async function () {
           full_name: opp.full_name,
           prev_holder: def.full_name,
           id: opp.id,
-          length: 1,
+          length: 0,
           startDate: formatStreakDate(game.date),
         })
       }

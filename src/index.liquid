@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-  
+  {% comment %} <link rel="stylesheet" href="style.css" />   {% endcomment %}
   {% capture css %}{% include 'style.css' %}{% endcapture %}
   <style>{{ css | cssmin }}</style>
 
@@ -44,25 +44,22 @@
 
       <section>
         <h2>How we got here.</h2>
-        <ul>
+        <table>
+          <tr>
+            <th>Team</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Games with the belt</th>
+          </tr>
           {% for streak in data.streaks %}
-            <li>
-              {%- if streak.length == 1 -%}
-                {% assign length = '(' | append: streak.length | append: ' game)' %}
-              {%- else -%}
-                {% assign length = '(' | append: streak.length | append: ' games)' %}
-              {%- endif -%}         
-    
-              {%- if forloop.first -%}
-                The <strong>{{ streak.full_name }}</strong> started the season with the belt and had it until {{ streak.endDate }} {{length}}.
-              {%- elsif forloop.last == false -%}
-                The <strong>{{ streak.full_name }}</strong> beat the <strong>{{streak.prev_holder }}</strong> on {{ streak.startDate }} and held the belt until {{ streak.endDate }} {{length}}.
-              {%- else -%}
-                The <strong>{{ streak.full_name }}</strong> have had the belt since beating the <strong>{{streak.prev_holder }}</strong> on {{ streak.startDate }} {{ length }}.
-              {%- endif -%}
-            </li>
+            <tr>
+              <td data-label="Team">{{ streak.full_name }}</td>
+              <td data-label="Start">{{ streak.startDate }}</td>
+              <td data-label="End">{{ streak.endDate }}</td>
+              <td data-label="Days">{{ streak.length }}</td>
+            </tr>
           {% endfor %}
-        </ul>
+        </table>
       </section>
 
       <section>
