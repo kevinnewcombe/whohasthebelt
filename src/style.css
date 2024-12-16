@@ -13,8 +13,8 @@ body{
   font-style: normal;
   line-height: 1.5;
   font-size: 16px;
-  color: light-dark(#162132, #eee);
-  background: light-dark(#eee, #162132);
+  color: light-dark(#162132, #fff);
+  background: light-dark(#fff, #162132);
 }
 
 *, *::before, *::after {
@@ -36,7 +36,7 @@ h2{
 }
 
 p{
-  font-size: 1rem;
+  font-size: 1.125rem;
   margin: 16px 0;
 }
 a{
@@ -54,7 +54,7 @@ section{
   margin-bottom: var(--section-gap);
 }
 
-ul{
+ol{
   list-style-type: none;
   padding:0;
 }
@@ -114,6 +114,7 @@ tr{
 td{
   display: flex;
   width:100%;
+  font-size: 1.125rem;
   &::before{
     opacity: 0.8;
     align-content: center;
@@ -135,6 +136,7 @@ td{
   td{
     width: auto;
     vertical-align: top;
+    font-size: 1.25rem;
     padding: 15px 10px 15px 0;
     &:before{
       display: none;
@@ -158,12 +160,12 @@ th{
   h2{
     font-size: 2rem;
   }
-  p{
+  p, li{
     font-size: 1.25rem;
   }
 
   li{
-    font-size: 1.25rem;
+
     padding:0.75rem 0;
   }
   .hero__eyebrow{

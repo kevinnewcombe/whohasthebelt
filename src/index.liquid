@@ -64,11 +64,11 @@
 
       <section>
         <h2>{{ data.streaks.last.full_name }} upcoming games.</h2>
-        <ul>
+        <ol>
           {% for game in data.upcomingGames %}
             <li>{{ game.visitor_team.full_name}} at {{ game.home_team.full_name}} on {{ game.human_date }}.</li>
           {% endfor %}
-        </ul>
+        </ol>
       </section>
     </main>
     <footer>
