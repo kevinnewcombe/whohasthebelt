@@ -17,7 +17,7 @@
   <meta property="og:description" content="Last year's NBA champs start this year with a belt that passes to whoever beats them, and so on. Who has it right now?">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://whohasthebelt.vercel.app/" />
-  <meta property="og:image" content="https://whohasthebelt.vercel.app/opengraph.jpg?v=2" />
+  <meta property="og:image" content="https://whohasthebelt.vercel.app/opengraph.jpg?v=3" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="article:published_time" content="{{ "now" | date: "%Y-%m-%dT%H:%M:%S+00:00" }}">
@@ -28,11 +28,12 @@
     <header id="hero">
       <span class="hero__eyebrow">The NBA <strong>Championship belt</strong> is held by the</span>
       {%- if data.streaks.last.full_name == 'Orlando Magic' -%}
-        <h1><a href="https://www.youtube.com/watch?v=8Vqd-sVisr4" target="_blank">{{ data.streaks.last.full_name }}</a></h1>
+        <h1><a href="https://www.youtube.com/clip/UgkxeiGTISWlIroKILocRdJ-xbY06vTw6g8Q" target="_blank">{{ data.streaks.last.full_name }}</a></h1>
       {%- else -%}
         <h1>{{ data.streaks.last.full_name }}</h1>
       {%- endif -%} 
-        <span class="hero__sub">as of {{ data.lastRun }}</span>
+      <span class="hero__sub">as of {{ data.lastRun }}</span><br />
+   
       </header>
       <main>
       <section>
@@ -42,6 +43,7 @@
 
       <section>
         <h2>How we got here.</h2>
+        <p>The Boston Celtics won the 2024 NBA Championship so they start the season with the belt. From there, here's a breakdown of every time it's changed hands.</p>
         <table>
           <tr>
             <th>Team</th>
@@ -52,9 +54,9 @@
           {% for streak in data.streaks %}
             <tr>
               <td data-label="Team">{{ streak.full_name }}</td>
-              <td data-label="Start">{{ streak.startDate }}</td>
-              <td data-label="End">{{ streak.endDate }}</td>
-              <td data-label="Days">{{ streak.length }}</td>
+              <td data-label="From">{{ streak.start_date }}</td>
+              <td data-label="To">{{ streak.end_date }}</td>
+              <td data-label="Games">{{ streak.length }}</td>
             </tr>
           {% endfor %}
         </table>

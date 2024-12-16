@@ -1,6 +1,7 @@
 :root{
   color-scheme: light dark;
   --section-gap: 100px;
+  --table-gap: 35px;
 }
 
 body{
@@ -36,6 +37,7 @@ h2{
 
 p{
   font-size: 1rem;
+  margin: 16px 0;
 }
 a{
   color: light-dark(#004ed3, #67d9ff);
@@ -91,7 +93,7 @@ footer p{
 }
 
 table{
-  margin: 20px 0;
+  margin: var(--table-gap) 0 0;
   font-size: 1.25rem;
   width: 100%;
 
@@ -103,7 +105,7 @@ th{
 
 tr{
   &:not(:nth-child(1)){
-    margin-top: 30px;
+    margin-top: 32px;
   }
   display:flex;
   flex-direction: column;
@@ -146,8 +148,10 @@ th{
 
 @media(min-width: 640px){
   :root{
+    --table-gap: 70px;
     --section-gap: 150px;
   }
+  
   h1{
     font-size: 7rem;
   }

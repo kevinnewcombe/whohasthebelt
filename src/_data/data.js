@@ -22,10 +22,6 @@ const lastRun = new Intl.DateTimeFormat('en-US', {
   month: 'long',
   day: 'numeric',
   year: 'numeric',
-  hourCycle: 'h12',
-  hour: 'numeric',
-  minute: '2-digit',
-  timeZoneName: 'short',
   timeZone: 'America/New_York'
 }).format(new Date());
 
@@ -80,7 +76,7 @@ module.exports = async function () {
       full_name: 'Boston Celtics',
       id: 2,
       length: 0,
-      startDate: formatStreakDate('2024-10-22')
+      start_date: formatStreakDate('2024-10-22')
     }
   ];
 
@@ -105,17 +101,19 @@ module.exports = async function () {
 
       }else{
         // start a new steak
-        currentStreak.endDate = formatStreakDate(game.date);
+        currentStreak.end_date = formatStreakDate(game.date);
         streaks.push({
           full_name: opp.full_name,
           prev_holder: def.full_name,
           id: opp.id,
           length: 0,
-          startDate: formatStreakDate(game.date),
+          start_date: formatStreakDate(game.date),
         })
       }
     } 
   }
+
+  streaks[streaks.length - 1].end_date = 'Present';
 
   // get upcoming games for the current belt holders
   upcomingGames = [];

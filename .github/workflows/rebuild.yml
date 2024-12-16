@@ -1,11 +1,10 @@
-# Rebuild the site daily as most evening games are finishing up
+# Rebuild the site daily at midnight pacific time
 # Cron schedule is in UTC time: https://dateful.com/convert/utc
 # Cron expression checker: https://crontab.cronhub.io/
 name: "Cron-triggered rebuild"
 on:
   schedule:
-    - cron: '0,30 2,3,4 * * *' # Runs 2:00, 2:30, 3:00, 3:30, 4:00 and 4:30 UTC time / 7 PM, 7:30 PM, etc... Mountain
-    - cron: '0 8 * * *'        # One last time at 1 AM MT to get any late games 
+    - cron: '0 8 * * *'
 jobs:
   rebuild:
     runs-on: ubuntu-latest
