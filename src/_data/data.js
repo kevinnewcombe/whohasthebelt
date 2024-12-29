@@ -38,7 +38,7 @@ const getGames = async (params, cacheAge, arr, paginate) =>{
   // get all the games from the start of the season up until the end of last month. These will have a month long cache
   while( next_cursor!==null){
     if(next_cursor ){
-      params = {...params, cursor: next_cursor};
+      params = {...params, cursor: next_cursor - 1};
     }
     const url = `https://api.balldontlie.io/v1/games?${ Object.entries(params).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&') }`
     console.log(`Fetching ${url}`);
@@ -68,7 +68,7 @@ module.exports = async function () {
   let pastGames = [];
   
   await getGames( { start_date: "2024-10-22", end_date: shortDate(lastDayOfLastMonth), per_page: 99 }, '4w', pastGames, true);
-  await getGames( { start_date: shortDate(lastDayOfLastMonth), end_date: '2024-12-31', per_page: 99 }, '29m', pastGames, true);
+  await getGames( { start_date: shortDate(lastDayOfLastMonth), end_date: shortDate(currentIsoDate), per_page: 99 }, '29m', pastGames, true);
 
   // Generate streak data.
   const streaks = [
@@ -95,12 +95,10 @@ module.exports = async function () {
       opp = {...game.home_team, score: game.home_team_score }; 
       def = {...game.visitor_team, score: game.visitor_team_score };
     }
-  
+
     if(def){
       currentStreak.length++; // Increase the value for 'games played with the belt'
-      if(def.score > opp.score){
-
-      }else{
+      if(def.score < opp.score){
         // start a new steak
         currentStreak.end_date = formatStreakDate(game.date);
         streaks.push({
