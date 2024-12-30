@@ -38,7 +38,7 @@ const getGames = async (params, cacheAge, arr, paginate) =>{
   // get all the games from the start of the season up until the end of last month. These will have a month long cache
   while( next_cursor!==null){
     if(next_cursor ){
-      params = {...params, cursor: next_cursor - 1};
+      params = {...params, cursor: next_cursor};
     }
     const url = `https://api.balldontlie.io/v1/games?${ Object.entries(params).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&') }`
     console.log(`Fetching ${url}`);
